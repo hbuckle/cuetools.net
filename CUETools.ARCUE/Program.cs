@@ -11,6 +11,7 @@ namespace ArCueDotNet
         {
             bool ok = true;
             int offset = 0;
+            string pregap = "00:00:00";
             bool verbose = false;
             string pathIn = null;
             for (int arg = 0; arg < args.Length; arg++)
@@ -19,6 +20,8 @@ namespace ArCueDotNet
                     ok = false;
                 else if ((args[arg] == "-O" || args[arg] == "--offset") && ++arg < args.Length)
                     ok = int.TryParse(args[arg], out offset);
+                else if ((args[arg] == "-P" || args[arg] == "--pregap") && ++arg < args.Length)
+                    pregap = args[arg];
                 else if ((args[arg] == "-v" || args[arg] == "--verbose"))
                     verbose = true;
                 else if (args[arg][0] != '-' && pathIn == null)
@@ -37,6 +40,7 @@ namespace ArCueDotNet
                 Console.WriteLine("Options:");
                 Console.WriteLine();
                 Console.WriteLine(" -O, --offset <samples>   Use specific offset;");
+                Console.WriteLine(" -P, --pregap <length>    Use specific pregap;");
                 Console.WriteLine(" -v, --verbose            Verbose mode");
                 return 1;
             }
@@ -62,6 +66,7 @@ namespace ArCueDotNet
                 cueSheet.Action = CUEAction.Verify;
                 //cueSheet.OutputStyle = CUEStyle.SingleFile;
                 cueSheet.WriteOffset = offset;
+                cueSheet.PreGapLengthMSF = pregap;
                 cueSheet.Open(pathIn);
                 cueSheet.UseAccurateRip();
                 cueSheet.UseCUEToolsDB("ARCUE " + CUESheet.CUEToolsVersion, null, true, CTDBMetadataSearch.None);
