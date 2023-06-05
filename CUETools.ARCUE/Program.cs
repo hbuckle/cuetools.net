@@ -78,6 +78,8 @@ namespace ArCueDotNet
             catch (Exception ex)
             {
                 Console.WriteLine("Error: " + ex.Message);
+                Console.WriteLine("Error: " + ex.Source);
+                Console.WriteLine("Error: " + ex.StackTrace);
                 return 3;
             }
 
