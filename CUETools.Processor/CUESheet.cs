@@ -2559,7 +2559,9 @@ namespace CUETools.Processor
         public void GenerateCTDBLog(TextWriter sw)
         {
             sw.WriteLine("[CTDB TOCID: {0}] {1}.", _toc.TOCID, _CUEToolsDB.DBStatus ?? "found");
+            sw.WriteLine("[CDTOC: {0}]", _toc.TAG);
             sw.WriteLine("[MusicBrainz ID: {0}]", _toc.MusicBrainzId);
+            sw.WriteLine("[MusicBrainz TOC: {0}]", _toc.MusicBrainzTOC);
             if (!_processed)
                 return;
             if (_CUEToolsDB.SubStatus != null)
